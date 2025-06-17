@@ -54,7 +54,7 @@ export default function IndexPage() {
         }
       `}</style>
 
-      <h1 className="welcome-heading">Welcome to Bus Booking</h1>
+      <h1 className="welcome-heading">Welcome to Quick Bus</h1>
 
       {authView === 'login' ? (
         <Login onSuccess={handleAuthSuccess} />

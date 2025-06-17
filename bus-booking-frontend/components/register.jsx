@@ -41,64 +41,156 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-container">
-      <style>{`
-        .auth-container {
-          background: white;
-          max-width: 400px;
-          margin: 40px auto;
-          padding: 30px;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    <div className="auth-bg">
+      <div className="auth-container">
+        <div className="register-icon" aria-label="register">📝</div>
+        <h2 className="register-title">Create Account</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label htmlFor="name">Name</label>
+          <input
+            name="name"
+            id="name"
+            placeholder="Your name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="phone">Phone</label>
+          <input
+            name="phone"
+            id="phone"
+            placeholder="Your phone"
+            value={form.phone}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="role">Role</label>
+          <select
+            name="role"
+            id="role"
+            value={form.role}
+            onChange={handleChange}
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+          <label htmlFor="email">Email</label>
+          <input
+            name="email"
+            id="email"
+            type="email"
+            placeholder="Your email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            placeholder="Create a password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Register</button>
+        </form>
+        {success && (
+          <p className="success-message">
+            ✅ Registration successful! Please login to continue.
+          </p>
+        )}
+      </div>
+      <style jsx>{`
+        .auth-bg {
+          min-height: 100vh;
+          background: linear-gradient(120deg, #e0e7ff 0%, #f0fdfa 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 0;
         }
-        .auth-container h2 {
-          margin-bottom: 20px;
+        .auth-container {
+          max-width: 400px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 38px 32px 30px;
+          border-radius: 18px;
+          background: rgba(255,255,255,0.95);
+          box-shadow: 0 8px 32px 0 rgba(37,99,235,0.10);
+          backdrop-filter: blur(3px);
+          font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+        .register-icon {
+          font-size: 2.5rem;
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+        .register-title {
           text-align: center;
-          color: #333;
+          font-size: 2rem;
+          color: #2563eb;
+          margin-bottom: 26px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }
+        .auth-form {
+          display: flex;
+          flex-direction: column;
+          gap: 13px;
+        }
+        .auth-form label {
+          font-weight: 600;
+          color: #334155;
+          margin-bottom: 3px;
+          font-size: 1rem;
         }
         .auth-form input, .auth-form select {
-          display: block;
-          width: 100%;
-          padding: 10px;
-          margin-bottom: 15px;
-          border: 1px solid #ccc;
-          border-radius: 6px;
+          padding: 13px 14px;
+          border: 1.5px solid #dbeafe;
+          border-radius: 9px;
+          font-size: 1rem;
+          background: #f8fafc;
+          transition: border 0.2s;
+          outline: none;
+        }
+        .auth-form input:focus, .auth-form select:focus {
+          border: 1.5px solid #2563eb;
+          background: #fff;
         }
         .auth-form button {
-          width: 100%;
-          background-color: #007bff;
-          color: white;
-          padding: 10px;
+          margin-top: 10px;
+          padding: 0.9rem 0;
+          font-size: 1.1rem;
           border: none;
-          border-radius: 6px;
+          border-radius: 9px;
+          background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
+          color: white;
+          font-weight: 700;
           cursor: pointer;
-          font-weight: bold;
+          box-shadow: 0 2px 8px rgba(37, 99, 235, 0.09);
+          transition: background 0.17s, box-shadow 0.17s;
+          letter-spacing: 0.5px;
         }
         .auth-form button:hover {
-          background-color: #0056b3;
+          background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+          box-shadow: 0 4px 20px rgba(37,99,235,0.17);
         }
         .success-message {
-          color: green;
+          color: #10b981;
           text-align: center;
-          margin-top: 15px;
+          margin-top: 18px;
           font-weight: bold;
+          font-size: 1.08rem;
+        }
+        @media (max-width: 600px) {
+          .auth-container {
+            padding: 18px 6vw 16px;
+          }
         }
       `}</style>
-
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} required />
-        <select name="role" value={form.role} onChange={handleChange}>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-        <button type="submit">Register</button>
-      </form>
-
-      {success && <p className="success-message">✅ Registration successful! Please login to continue.</p>}
     </div>
   );
 }
